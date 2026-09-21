@@ -30,3 +30,15 @@ def classify_video_performance(percent_difference):
         return "na média"
     else:
         return "abaixo da média"
+def classify_title_length(title):
+    """
+    Classifica o tamanho de um título com base na quantidade de caracteres.
+    """
+    length = len(title.strip())
+
+    if length < 30:
+        return "curto"
+    elif length <= 70:
+        return "ideal"
+    else:
+        return "longo"
