@@ -18,3 +18,15 @@ def compare_video_performance(video_views, channel_average_views):
 
     difference = ((video_views - channel_average_views) / channel_average_views) * 100
     return round(difference, 2)
+def classify_video_performance(percent_difference):
+    """
+    Classifica o desempenho de um vídeo em relação à média do canal.
+    """
+    if percent_difference >= 50:
+        return "destaque"
+    elif percent_difference >= 10:
+        return "acima da média"
+    elif percent_difference > -10:
+        return "na média"
+    else:
+        return "abaixo da média"
