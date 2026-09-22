@@ -1,0 +1,22 @@
+name: Alertas do PUDIMOPS no Discord
+
+on:
+  push:
+
+jobs:
+  alerta-discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar alerta para o Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          REPOSITORY: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          SHORT_SHA="${COMMIT_SHA::7}"
+
+          curl -H "Content-Type: application/json" \
+            -d "{\"content\":\"🍮 Novo commit no **${REPOSITORY}** na branch **${BRANCH}**. Commit: \`${SHORT_SHA}\`\"}" \
+            "$DISCORD_WEBHOOK"
