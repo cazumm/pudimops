@@ -31,3 +31,7 @@ def test_classify_title_length():
         "TESTANDO UM NOVO SISTEMA PARA ANALISAR VÍDEOS"
     )
     assert result == "ideal"
+
+def test_classify_title_length_short():
+    result = classify_title_length("NOVO VÍDEO")
+    assert result == "curto"
