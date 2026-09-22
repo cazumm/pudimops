@@ -11,12 +11,13 @@ jobs:
       - name: Enviar alerta para o Discord
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          REPOSITORY: ${{ github.repository }}
+          REPOSITORIO: ${{ github.repository }}
           BRANCH: ${{ github.ref_name }}
-          COMMIT_SHA: ${{ github.sha }}
+          SHA_COMMIT: ${{ github.sha }}
+
         run: |
-          SHORT_SHA="${COMMIT_SHA::7}"
+          SHA_CURTO="${SHA_COMMIT::7}"
 
           curl -H "Content-Type: application/json" \
-            -d "{\"content\":\"Novo commit no **${REPOSITORY}** da branch **${BRANCH}**. Commit: \`${SHORT_SHA}\`\"}" \
+            -d "{\"content\":\"Novo commit no **${REPOSITORIO}** na branch **${RAMO}**. Commit: \`${SHA_CURTO}\`\"}" \
             "$DISCORD_WEBHOOK"
