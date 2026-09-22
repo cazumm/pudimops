@@ -35,3 +35,8 @@ def test_classify_title_length():
 def test_classify_title_length_short():
     result = classify_title_length("NOVO VÍDEO")
     assert result == "curto"
+
+def test_classify_title_length_long():
+    titulo_longo = "A" * 71
+    resultado = classify_title_length(titulo_longo)
+    assert resultado == "longo"
