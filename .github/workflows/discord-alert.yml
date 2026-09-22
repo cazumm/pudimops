@@ -19,5 +19,5 @@ jobs:
           SHA_CURTO="${SHA_COMMIT::7}"
 
           curl -H "Content-Type: application/json" \
-            -d "{\"content\":\"Novo commit no **${REPOSITORIO}** na branch **${RAMO}**. Commit: \`${SHA_CURTO}\`\"}" \
+            -d "{\"content\":\"Novo commit no **${REPOSITORIO}** na branch **${BRANCH}**. Commit: \`${SHA_CURTO}\`\"}" \
             "$DISCORD_WEBHOOK"
