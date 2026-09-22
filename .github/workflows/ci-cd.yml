@@ -1,0 +1,49 @@
+name: CI/CD do PUDIMOPS
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    name: CI - Testes unitários
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar pytest
+        run: python -m pip install pytest
+
+      - name: Executar testes unitários
+        run: pytest -v
+
+  cd:
+    name: CD - Preparar pacote
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Criar pacote do PUDIMOPS
+        run: |
+          mkdir -p entrega
+          cp analytics.py README.md entrega/
+
+      - name: Disponibilizar pacote
+        uses: actions/upload-artifact@v4
+        with:
+          name: pudimops
+          path: entrega/
